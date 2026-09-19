@@ -43,7 +43,7 @@ export default async function StartGroupPage({
       </p>
       <div className="grid gap-2">
         <h1 className="font-display text-4xl leading-tight">
-          Start the {school.name} group
+          Start a group for {school.name}
         </h1>
         <p className="text-ink-muted leading-relaxed">
           Four short steps. The important one: {founderLabel} joins through the

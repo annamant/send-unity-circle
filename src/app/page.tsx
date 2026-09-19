@@ -31,8 +31,9 @@ export default async function HomePage() {
           </div>
           <p className="text-sm text-ink-muted">
             {stats.schoolCount.toLocaleString("en-GB")} schools listed from DfE
-            GIAS (London to start) · {stats.liveCount} live groups ·{" "}
-            {stats.pendingCount} waiting for admin to join
+            GIAS (London to start) · {stats.liveCount} live{" "}
+            {stats.liveCount === 1 ? "group" : "groups"} · {stats.pendingCount}{" "}
+            waiting for admin to join
           </p>
         </div>
       </section>
