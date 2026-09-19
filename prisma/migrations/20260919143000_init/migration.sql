@@ -1,6 +1,9 @@
+-- CreateSchema
+CREATE SCHEMA IF NOT EXISTS "public";
+
 -- CreateTable
 CREATE TABLE "School" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "urn" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "name" TEXT NOT NULL,
@@ -15,24 +18,27 @@ CREATE TABLE "School" (
     "establishmentType" TEXT,
     "website" TEXT,
     "nameSearch" TEXT NOT NULL,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "School_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "WhatsAppGroup" (
-    "id" TEXT NOT NULL PRIMARY KEY,
+    "id" TEXT NOT NULL,
     "schoolId" TEXT NOT NULL,
     "inviteUrl" TEXT NOT NULL,
     "status" TEXT NOT NULL DEFAULT 'PENDING',
     "submitterNote" TEXT,
     "adminNote" TEXT,
-    "submittedAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "liveAt" DATETIME,
-    "rejectedAt" DATETIME,
-    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL,
-    CONSTRAINT "WhatsAppGroup_schoolId_fkey" FOREIGN KEY ("schoolId") REFERENCES "School" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+    "submittedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "liveAt" TIMESTAMP(3),
+    "rejectedAt" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "WhatsAppGroup_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -58,3 +64,6 @@ CREATE UNIQUE INDEX "WhatsAppGroup_schoolId_key" ON "WhatsAppGroup"("schoolId");
 
 -- CreateIndex
 CREATE INDEX "WhatsAppGroup_status_idx" ON "WhatsAppGroup"("status");
+
+-- AddForeignKey
+ALTER TABLE "WhatsAppGroup" ADD CONSTRAINT "WhatsAppGroup_schoolId_fkey" FOREIGN KEY ("schoolId") REFERENCES "School"("id") ON DELETE CASCADE ON UPDATE CASCADE;

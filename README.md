@@ -20,10 +20,9 @@ Out of scope: native apps, WhatsApp Cloud API group creation, unofficial WhatsAp
 ## Stack
 
 - Next.js App Router (v16), TypeScript, Tailwind CSS v4
-- Prisma + **SQLite** for local and simple deploys
-- Switch to **Postgres** when you need a hosted database (Vercel/Neon, Railway Postgres, etc.)
+- Prisma + **Postgres** (Railway Postgres in production; Docker or any Postgres locally)
 
-SQLite is the default so `npm run dev` works with no extra services. It is a good fit for a VPS, Fly.io, or Railway **with a persistent volume**. Serverless hosts such as Vercel do not persist a SQLite file — use Postgres there.
+SQLite is not used. One Prisma schema and one migration history keep production and local aligned.
 
 ## Setup
 
@@ -31,9 +30,12 @@ SQLite is the default so `npm run dev` works with no extra services. It is a goo
 npm install
 cp .env.example .env
 # edit ADMIN_PASSWORD (required)
+docker compose up -d db
 npm run db:setup
 npm run dev
 ```
+
+If you already have Postgres, skip Compose and set `DATABASE_URL` to that database instead.
 
 Open [http://localhost:3000](http://localhost:3000). Admin: [http://localhost:3000/admin](http://localhost:3000/admin). Family tools: [http://localhost:3000/tools](http://localhost:3000/tools).
 
@@ -41,7 +43,7 @@ Open [http://localhost:3000](http://localhost:3000). Admin: [http://localhost:30
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
-| `DATABASE_URL` | yes | Prisma database URL. Local SQLite: `file:./dev.db` (path is relative to `prisma/`) |
+| `DATABASE_URL` | yes | Postgres connection string. Local Compose default: `postgresql://postgres:postgres@localhost:5432/send_unity_circle`. On Railway, use the Postgres plugin URL (already attached to the `web` service). |
 | `ADMIN_PASSWORD` | yes | Shared password for `/admin` |
 | `FOUNDER_WHATSAPP_DISPLAY` | no | Public label for the joining account. Default: `SEND Unity Circle admin` |
 | `FOUNDER_WHATSAPP_E164` | no | Backup number to copy in the wizard. Joining via the invite link is the primary path |
@@ -57,28 +59,21 @@ Never put a personal first name on the public site; the joining identity is **SE
 
 Chat history is **session-only in the browser** (`sessionStorage`). The server streams a reply and does not store messages. Without `OPENAI_API_KEY`, the page still loads and explains that tools are temporarily unavailable.
 
-### Production database (Postgres)
+### Deploy (Railway)
 
-1. Create a Postgres database (Neon, Railway, Supabase, …).
-2. In `prisma/schema.prisma`, change `provider = "sqlite"` to `provider = "postgresql"`.
-3. Set `DATABASE_URL` to the Postgres URL (and `DIRECT_URL` if your host asks for it).
-4. Generate a new migration (`npx prisma migrate dev`) or reset migrations for the first production database.
-5. Run `npx prisma migrate deploy` and `npm run db:seed` (or `npm run import:gias -- --england`).
+Production is Postgres-only. The `web` service should have `DATABASE_URL` from the Railway Postgres plugin.
 
-The schema avoids SQLite-only types so this switch stays small.
-
-### Deploy notes
-
-Suggested production start:
+`railway.json` sets the start command to `npm run start:production`, which is:
 
 ```bash
 npx prisma migrate deploy
 npm run db:seed
-npm run build
-npm start
+npx next start
 ```
 
-`db:seed` upserts schools by URN. It also applies founder-confirmed live invites from `data/live-groups.json` (currently The Elmgreen School only). Other group statuses are left alone. Re-run seed when you refresh GIAS names.
+Build remains `npm run build` (`prisma generate` + `next build`). `prisma` and `tsx` are runtime dependencies so migrate + seed work after the image is pruned.
+
+`db:seed` upserts schools by URN. It also applies founder-confirmed live invites from `data/live-groups.json` (The Elmgreen School and Kingsdale Foundation School). Other group statuses are left alone. Re-run seed when you refresh GIAS names.
 
 To mark another school live after the founder confirms the invite:
 
@@ -116,9 +111,11 @@ Data source: [Get Information about Schools](https://www.get-information-schools
 | --- | --- |
 | `npm run dev` | Next.js dev server |
 | `npm run build` | `prisma generate` + production build |
-| `npm start` | Start the production server |
+| `npm start` | Start the production server (no migrate) |
+| `npm run start:production` | `prisma migrate deploy` + seed + `next start` (Railway) |
 | `npm run db:setup` | Apply migrations and seed London GIAS schools |
 | `npm run db:seed` | Upsert London schools and founder-confirmed live groups |
+| `npm run db:migrate` | `prisma migrate deploy` |
 | `npm run group:live` | Mark one school live: `--urn` + `--url` |
 | `npm run import:gias` | Download GIAS and upsert London (or `--england`) |
 | `npm run lint` | ESLint |
