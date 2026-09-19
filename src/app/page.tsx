@@ -85,6 +85,23 @@ export default async function HomePage() {
         </ul>
       </section>
 
+      <section className="mx-auto max-w-3xl px-4 pb-12 grid gap-3">
+        <h2 className="font-display text-3xl">Family tools</h2>
+        <p className="text-ink-muted leading-relaxed text-lg">
+          Need help with a letter, or a question about what your child may be
+          entitled to? Family tools can draft with you in plain English. It is
+          parent support, not legal advice.
+        </p>
+        <p>
+          <Link
+            href="/tools"
+            className="font-bold text-teal-dark underline decoration-gold underline-offset-4"
+          >
+            Open Family tools
+          </Link>
+        </p>
+      </section>
+
       <section className="mx-auto max-w-3xl px-4 pb-16 grid gap-4">
         <p className="font-display text-3xl leading-snug text-balance">
           No family alone. No kid left behind.

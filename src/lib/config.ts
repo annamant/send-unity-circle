@@ -19,3 +19,24 @@ export function getAdminPassword(): string {
   }
   return value;
 }
+
+const DEFAULT_FAMILY_TOOLS_MODEL = "gpt-4o-mini";
+const DEFAULT_OPENAI_BASE_URL = "https://api.openai.com/v1";
+
+export function getOpenAIApiKey(): string | null {
+  const value = process.env.OPENAI_API_KEY?.trim();
+  return value || null;
+}
+
+export function isFamilyToolsAvailable(): boolean {
+  return Boolean(getOpenAIApiKey());
+}
+
+export function getFamilyToolsModel(): string {
+  return process.env.OPENAI_MODEL?.trim() || DEFAULT_FAMILY_TOOLS_MODEL;
+}
+
+export function getOpenAIBaseUrl(): string {
+  const value = process.env.OPENAI_BASE_URL?.trim() || DEFAULT_OPENAI_BASE_URL;
+  return value.replace(/\/+$/, "");
+}

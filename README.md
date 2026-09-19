@@ -11,10 +11,11 @@ Parents find their child’s school (official DfE name), join a live group, or s
 - School page: **Join** when live, or **Start group**
 - Guided start wizard (exact group name, WhatsApp steps, paste invite → pending)
 - Admin area (password): pending queue, mark live after joining, edit/reject links, schools missing groups
+- **Family tools** (`/tools`): in-app chat for letters and rights questions (session-only in the browser; not stored on the server)
 - Seeded DfE / GIAS open establishments for **London**, including **Lambeth** and **Southwark**, **The Elmgreen School**, and **Kingsdale Foundation School**
 - Path to wider England via `npm run import:gias -- --england`
 
-Out of scope: Family Tool AI, native apps, WhatsApp Cloud API group creation, unofficial WhatsApp bots.
+Out of scope: native apps, WhatsApp Cloud API group creation, unofficial WhatsApp bots, chat history storage.
 
 ## Stack
 
@@ -34,7 +35,7 @@ npm run db:setup
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Admin: [http://localhost:3000/admin](http://localhost:3000/admin).
+Open [http://localhost:3000](http://localhost:3000). Admin: [http://localhost:3000/admin](http://localhost:3000/admin). Family tools: [http://localhost:3000/tools](http://localhost:3000/tools).
 
 ### Environment
 
@@ -44,8 +45,17 @@ Open [http://localhost:3000](http://localhost:3000). Admin: [http://localhost:30
 | `ADMIN_PASSWORD` | yes | Shared password for `/admin` |
 | `FOUNDER_WHATSAPP_DISPLAY` | no | Public label for the joining account. Default: `SEND Unity Circle admin` |
 | `FOUNDER_WHATSAPP_E164` | no | Backup number to copy in the wizard. Joining via the invite link is the primary path |
+| `OPENAI_API_KEY` | for Family tools | OpenAI-compatible API key. If unset, `/tools` shows a friendly unavailable state |
+| `OPENAI_MODEL` | no | Chat model. Default: `gpt-4o-mini` |
+| `OPENAI_BASE_URL` | no | OpenAI-compatible base URL. Default: `https://api.openai.com/v1` |
 
 Never put a personal first name on the public site; the joining identity is **SEND Unity Circle admin**.
+
+### Family tools
+
+`/tools` is an in-app chat (not a link out to ChatGPT). Optional school context: `/tools?school={slug}` looks up the official school name and local authority and adds them to the system prompt.
+
+Chat history is **session-only in the browser** (`sessionStorage`). The server streams a reply and does not store messages. Without `OPENAI_API_KEY`, the page still loads and explains that tools are temporarily unavailable.
 
 ### Production database (Postgres)
 

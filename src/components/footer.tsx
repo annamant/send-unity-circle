@@ -24,6 +24,11 @@ export function Footer() {
             </Link>
           </li>
           <li>
+            <Link className="underline decoration-gold underline-offset-4 hover:text-ink" href="/tools">
+              Family tools
+            </Link>
+          </li>
+          <li>
             <Link className="underline decoration-gold underline-offset-4 hover:text-ink" href="/privacy">
               Privacy
             </Link>

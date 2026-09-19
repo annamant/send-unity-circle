@@ -4,6 +4,7 @@ import { Logo } from "@/components/logo";
 const links = [
   { href: "/schools", label: "Find a school", short: "Schools" },
   { href: "/how-it-works", label: "How it works", short: "How it works" },
+  { href: "/tools", label: "Family tools", short: "Tools" },
 ];
 
 export function Header() {

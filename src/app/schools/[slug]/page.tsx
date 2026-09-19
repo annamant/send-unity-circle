@@ -136,6 +136,23 @@ export default async function SchoolPage({
           </div>
         </section>
       ) : null}
+
+      <section className="rounded-3xl bg-paper border border-mist p-5 grid gap-3">
+        <h2 className="font-display text-2xl">Family tools</h2>
+        <p className="text-ink-muted leading-relaxed">
+          Need help writing to the school, or a question about what your child
+          may be entitled to? Family tools can draft with you in plain English.
+          It is parent support, not legal advice.
+        </p>
+        <p>
+          <Link
+            href={`/tools?school=${school.slug}`}
+            className="font-bold text-teal-dark underline decoration-gold underline-offset-4"
+          >
+            Ask about {school.name}
+          </Link>
+        </p>
+      </section>
     </div>
   );
 }
