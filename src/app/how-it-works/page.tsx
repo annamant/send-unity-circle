@@ -49,10 +49,8 @@ export default function HowItWorksPage() {
       <section className="grid gap-3">
         <h2 className="font-display text-2xl">Finding your group</h2>
         <p className="text-ink-muted leading-relaxed">
-          Search for your child&apos;s school. If a group is ready, tap Join —
-          you do not have to add a contact. If there isn&apos;t one yet, you can
-          start it. SEND Unity Circle admin joins through the invite you paste,
-          and then other parents can find it here.
+          Search for your child&apos;s school. If a group is ready, tap Join.
+          If there isn&apos;t one yet, you can start it.
         </p>
       </section>
 

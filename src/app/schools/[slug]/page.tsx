@@ -66,9 +66,8 @@ export default async function SchoolPage({
         <section className="rounded-3xl bg-paper border border-mist p-5 grid gap-4">
           <h2 className="font-display text-2xl">Join the parent group</h2>
           <p className="text-ink-muted leading-relaxed">
-            This school&apos;s WhatsApp group is ready. {founder} has already
-            joined. Open the invite to become a member — you do not need to add
-            a contact.
+            This school&apos;s WhatsApp group is ready. Open the invite to
+            become a member.
           </p>
           <a
             href={school.group.inviteUrl}
@@ -107,7 +106,7 @@ export default async function SchoolPage({
           <h2 className="font-display text-2xl">Please start again with a new link</h2>
           <p className="text-ink-muted leading-relaxed">
             The last invite link could not be used. Create a fresh WhatsApp
-            invite and submit it — still without adding a contact.
+            invite and submit it.
           </p>
           {school.group?.adminNote ? (
             <p className="text-sm">Note from admin: {school.group.adminNote}</p>
@@ -120,8 +119,7 @@ export default async function SchoolPage({
           <h2 className="font-display text-2xl">Start this school&apos;s group</h2>
           <p className="text-ink-muted leading-relaxed">
             Use the guided steps to create a WhatsApp group with the official
-            name, then paste the invite link. {founder} joins via the link. You
-            do not have to add anyone as a contact.
+            name, then paste the invite link.
           </p>
           <div className="flex flex-wrap gap-3 items-center">
             <Link

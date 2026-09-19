@@ -46,8 +46,7 @@ export default async function StartGroupPage({
           Start a group for {school.name}
         </h1>
         <p className="text-ink-muted leading-relaxed">
-          Four short steps. The important one: {founderLabel} joins through the
-          invite link you paste. You do not need to add a contact.
+          Four short steps to create the WhatsApp group and share the invite.
         </p>
       </div>
       <StartWizard

@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SEND Unity Circle",
     description:
-      "Find your school’s parent WhatsApp group, or start one. You do not need to add a contact.",
+      "Find your school’s parent WhatsApp group, or start one.",
     locale: "en_GB",
     type: "website",
   },

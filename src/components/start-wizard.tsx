@@ -77,13 +77,9 @@ export function StartWizard({
           <ol className="grid gap-2 text-ink-muted leading-relaxed list-decimal pl-5">
             <li>Open WhatsApp on your phone.</li>
             <li>Tap New chat, then New group.</li>
-            <li>You can create the group with only yourself — no extra contacts needed.</li>
+            <li>You can create the group with only yourself.</li>
             <li>Paste the exact group name, then create the group.</li>
           </ol>
-          <p className="rounded-2xl bg-sage/70 px-4 py-3 text-sm leading-relaxed">
-            You do <strong>not</strong> need to add {founderLabel} as a contact.
-            We join later using the invite link.
-          </p>
         </section>
       ) : null}
 
@@ -95,16 +91,11 @@ export function StartWizard({
             <li>Choose Invite to group via link.</li>
             <li>Copy the link. It should start with chat.whatsapp.com.</li>
           </ol>
-          <p className="text-sm text-ink-muted leading-relaxed">
-            {founderLabel} will use this link to enter the group. You never have
-            to share your address book.
-          </p>
           {founderE164 ? (
             <div className="rounded-2xl border border-mist bg-cream px-4 py-3 grid gap-2">
               <p className="text-sm leading-relaxed">
                 Optional backup only — if a WhatsApp screen asks for a number,
-                you can copy {founderLabel}&apos;s number. You still should not
-                need to add a contact.
+                you can copy {founderLabel}&apos;s number.
               </p>
               <CopyButton
                 value={founderE164}

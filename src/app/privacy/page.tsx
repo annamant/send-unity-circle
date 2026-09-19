@@ -14,8 +14,8 @@ export default function PrivacyPage() {
         ready for other parents, or needs a new link.
       </p>
       <p className="text-ink-muted leading-relaxed">
-        Parents do not create accounts on this website. You do not have to add
-        anyone as a contact. You join through a WhatsApp invite link.
+        Parents do not create accounts on this website. You join through a
+        WhatsApp invite link.
       </p>
       <p className="text-ink-muted leading-relaxed">
         Only SEND Unity Circle admin can sign in to look after groups. That

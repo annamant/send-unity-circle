@@ -11,8 +11,6 @@ export function Footer() {
         </p>
         <p className="mt-2 max-w-2xl leading-relaxed">
           A parent-led UK network. Parents start each school WhatsApp group.
-          SEND Unity Circle admin then joins through the invite link, so the
-          next families can find it here — without adding anyone as a contact.
         </p>
         <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
           <li>
