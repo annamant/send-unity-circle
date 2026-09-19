@@ -1,59 +1,68 @@
 import Link from "next/link";
-import { getFounderDisplayName } from "@/lib/config";
 
 export const metadata = {
   title: "How it works",
+  description:
+    "One parent WhatsApp group per school. Find yours, or start one, so no family faces this fight alone.",
 };
 
 export default function HowItWorksPage() {
-  const founder = getFounderDisplayName();
-
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10 grid gap-8">
-      <h1 className="font-display text-4xl">How SEND Unity Circle works</h1>
-      <p className="text-lg text-ink-muted leading-relaxed">
-        This website does not replace WhatsApp. It helps you find the right
-        parent group for your school — official names, one group per school,
-        and a clear path from “no group yet” to “join here”.
-      </p>
+    <div className="mx-auto max-w-3xl px-4 py-10 grid gap-10">
+      <header className="grid gap-4">
+        <h1 className="font-display text-4xl leading-tight">
+          How SEND Unity Circle works
+        </h1>
+        <p className="text-lg text-ink-muted leading-relaxed">
+          We are a parent-led network for families whose children are failed by
+          schools and local authorities — SEND, mental health, bullying,
+          isolation, or any other reason.
+        </p>
+      </header>
 
       <section className="grid gap-3">
-        <h2 className="font-display text-2xl">Borough hubs</h2>
+        <h2 className="font-display text-2xl">Why families feel so alone</h2>
         <p className="text-ink-muted leading-relaxed">
-          SEND Unity Circle creates WhatsApp Communities for each borough.
-          Those Communities are the hubs. School groups sit underneath them
-          once they are ready to join. {founder} adds a school group to its
-          borough Community in WhatsApp. You do not need to do that step.
+          We are everywhere, and still we are invisible. We are forced to fight
+          alone. Support is promised — then we are left isolated, blamed and
+          unheard.
         </p>
       </section>
 
       <section className="grid gap-3">
-        <h2 className="font-display text-2xl">Parents start school groups</h2>
+        <h2 className="font-display text-2xl">School by school</h2>
         <p className="text-ink-muted leading-relaxed">
-          From a school page, follow the short steps. Use the exact group name
-          we show (the official school name). Create a WhatsApp group, copy the
-          invite link, and paste it here. You do not have to add {founder} as a
-          contact.
+          SEND Unity Circle unites parent to parent, school by school, so no
+          family faces this fight alone.
         </p>
       </section>
 
       <section className="grid gap-3">
-        <h2 className="font-display text-2xl">Admin joins, then others can join</h2>
+        <h2 className="font-display text-2xl">What a school group gives you</h2>
         <p className="text-ink-muted leading-relaxed">
-          {founder} opens the invite and joins. Until then, the school is
-          waiting for SEND Unity Circle admin to join. After that, other parents
-          join from the school page on this website — still via the link, not by
-          swapping numbers.
+          One WhatsApp group per school. Instant backup from parents who know
+          the fight. A place to swap real tactics. A united voice schools cannot
+          ignore.
         </p>
       </section>
 
       <section className="grid gap-3">
-        <h2 className="font-display text-2xl">What we ask of you</h2>
-        <ul className="list-disc pl-5 text-ink-muted leading-relaxed grid gap-2">
-          <li>A parent at the school creates the WhatsApp group — we do not create it for you.</li>
-          <li>You never have to add anyone as a contact.</li>
-          <li>You do not need to add the group to a borough Community. We do that in WhatsApp.</li>
-        </ul>
+        <h2 className="font-display text-2xl">Finding your group</h2>
+        <p className="text-ink-muted leading-relaxed">
+          Search for your child&apos;s school. If a group is ready, tap Join —
+          you do not have to add a contact. If there isn&apos;t one yet, you can
+          start it. SEND Unity Circle admin joins through the invite you paste,
+          and then other parents can find it here.
+        </p>
+      </section>
+
+      <section className="grid gap-3">
+        <p className="font-display text-2xl leading-snug">
+          No family alone. No kid left behind.
+        </p>
+        <p className="text-ink-muted leading-relaxed">
+          Started by a parent after her own children were failed.
+        </p>
       </section>
 
       <p>
