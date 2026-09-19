@@ -11,7 +11,7 @@ export function Header() {
     <header className="border-b border-mist bg-paper/90 backdrop-blur-sm sticky top-0 z-40">
       <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
         <Link href="/" className="flex items-center gap-2.5 min-h-11">
-          <Logo className="h-9 w-9 shrink-0" />
+          <Logo className="h-11 w-11 sm:h-12 sm:w-12 shrink-0" priority />
           <span className="font-display text-base leading-tight tracking-tight sm:text-xl">
             SEND Unity Circle
           </span>

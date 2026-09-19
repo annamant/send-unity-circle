@@ -1,10 +1,14 @@
 import Link from "next/link";
+import { Logo } from "@/components/logo";
 
 export function Footer() {
   return (
     <footer className="mt-16 border-t border-mist bg-paper">
       <div className="mx-auto max-w-5xl px-4 py-10 text-sm text-ink-muted">
-        <p className="font-display text-lg text-ink">SEND Unity Circle</p>
+        <p className="flex items-center gap-3 font-display text-lg text-ink">
+          <Logo className="h-12 w-12" />
+          SEND Unity Circle
+        </p>
         <p className="mt-2 max-w-2xl leading-relaxed">
           A parent-led UK network. This website is the school index and control
           centre. School WhatsApp groups are created by parents; SEND Unity
