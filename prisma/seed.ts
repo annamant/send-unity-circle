@@ -2,6 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { setSchoolGroupLive } from "../src/lib/live-group";
 
 type SeedSchool = {
   urn: string;
@@ -100,6 +101,17 @@ async function main() {
     `Seeded ${payload.count} GIAS schools (${payload.source}). Database now has ${total} schools — Lambeth ${lambeth}, Southwark ${southwark}.`,
   );
   console.log(`Elmgreen: ${elmgreen?.urn} ${elmgreen?.postcode}; Kingsdale: ${kingsdale?.urn} ${kingsdale?.postcode}`);
+
+  const livePath = join(dirname(fileURLToPath(import.meta.url)), "..", "data", "live-groups.json");
+  const liveGroups = JSON.parse(readFileSync(livePath, "utf8")) as Array<{
+    urn: string;
+    inviteUrl: string;
+    note?: string;
+  }>;
+  for (const entry of liveGroups) {
+    const result = await setSchoolGroupLive(prisma, entry);
+    console.log(`Live group: ${result.school.name} → ${result.inviteUrl}`);
+  }
 }
 
 main()

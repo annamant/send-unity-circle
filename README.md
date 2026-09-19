@@ -68,7 +68,15 @@ npm run build
 npm start
 ```
 
-`db:seed` upserts schools by URN and does not wipe group statuses. Re-run it when you refresh GIAS names.
+`db:seed` upserts schools by URN. It also applies founder-confirmed live invites from `data/live-groups.json` (currently The Elmgreen School only). Other group statuses are left alone. Re-run seed when you refresh GIAS names.
+
+To mark another school live after the founder confirms the invite:
+
+```bash
+npm run group:live -- --urn 136309 --url 'https://chat.whatsapp.com/…'
+```
+
+That command stores the normalised `chat.whatsapp.com` path only (tracking query params are dropped).
 
 To load **all open English establishments** from the daily GIAS extract:
 
@@ -100,7 +108,8 @@ Data source: [Get Information about Schools](https://www.get-information-schools
 | `npm run build` | `prisma generate` + production build |
 | `npm start` | Start the production server |
 | `npm run db:setup` | Apply migrations and seed London GIAS schools |
-| `npm run db:seed` | Upsert London schools from `data/london-schools.json` |
+| `npm run db:seed` | Upsert London schools and founder-confirmed live groups |
+| `npm run group:live` | Mark one school live: `--urn` + `--url` |
 | `npm run import:gias` | Download GIAS and upsert London (or `--england`) |
 | `npm run lint` | ESLint |
 

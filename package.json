@@ -13,7 +13,8 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:setup": "prisma migrate deploy && tsx prisma/seed.ts",
     "db:studio": "prisma studio",
-    "import:gias": "tsx scripts/import-gias.ts"
+    "import:gias": "tsx scripts/import-gias.ts",
+    "group:live": "tsx scripts/set-live-group.ts"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"
