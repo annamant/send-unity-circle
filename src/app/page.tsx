@@ -21,19 +21,18 @@ export default async function HomePage() {
             </h1>
             <p className="text-lg leading-relaxed text-ink-muted">
               SEND Unity Circle is a parent-led network. Each school has one
-              WhatsApp group. Borough WhatsApp Communities are the hubs. This
-              website is the school index — so families can join the right group
-              without adding anyone as a contact.
+              WhatsApp group. Borough WhatsApp Communities bring nearby schools
+              together. This website helps you find the right group — without
+              adding anyone as a contact.
             </p>
           </div>
           <div className="rounded-3xl border border-mist bg-cream p-4 sm:p-6">
             <SearchForm />
           </div>
           <p className="text-sm text-ink-muted">
-            {stats.schoolCount.toLocaleString("en-GB")} schools listed from DfE
-            GIAS (London to start) · {stats.liveCount} live{" "}
-            {stats.liveCount === 1 ? "group" : "groups"} · {stats.pendingCount}{" "}
-            waiting for admin to join
+            {stats.schoolCount.toLocaleString("en-GB")} schools on the official
+            school list (London to start) · {stats.liveCount} ready to join ·{" "}
+            {stats.pendingCount} waiting for SEND Unity Circle admin to join
           </p>
         </div>
       </section>
@@ -41,9 +40,8 @@ export default async function HomePage() {
       <section className="mx-auto max-w-5xl px-4 py-12 grid gap-6">
         <h2 className="font-display text-3xl">Starting boroughs</h2>
         <p className="text-ink-muted max-w-2xl leading-relaxed">
-          We are beginning with Lambeth and Southwark, with the rest of London
-          already searchable, and a path to wider England from the same DfE
-          list.
+          We are beginning with Lambeth and Southwark. You can already search
+          schools across London.
         </p>
         <ul className="grid gap-4 sm:grid-cols-2">
           {LAUNCH_BOROUGHS.map((name) => {
@@ -66,28 +64,28 @@ export default async function HomePage() {
       </section>
 
       <section className="mx-auto max-w-5xl px-4 pb-12 grid gap-6">
-        <h2 className="font-display text-3xl">How a school group goes live</h2>
+        <h2 className="font-display text-3xl">How a school group gets going</h2>
         <ol className="grid gap-4">
           {[
             {
-              title: "Find the official school",
-              body: "Search by name, postcode or local authority. Names come from the Department for Education, so everyone uses the same wording.",
+              title: "Find your school",
+              body: "Search by name, postcode or local authority. We use official school names from the Department for Education, so everyone uses the same wording.",
             },
             {
-              title: "Join — if the group is live",
+              title: "Join — if a group is ready",
               body: "When SEND Unity Circle admin has already joined, you’ll see a Join button. One tap opens the WhatsApp invite.",
             },
             {
               title: "Or start a group",
-              body: "We give you the exact group name. You create the WhatsApp group and paste the chat.whatsapp.com link. You do not have to add a contact.",
+              body: "We give you the exact group name. You create the WhatsApp group and paste the invite link. You do not have to add a contact.",
             },
             {
               title: "Admin joins via the link",
-              body: "SEND Unity Circle admin joins through the invite you pasted. The school then goes live, and the next parents join from this site.",
+              body: "SEND Unity Circle admin joins through the invite you pasted. When they have joined, other parents can join from this website.",
             },
             {
               title: "Borough Community comes later",
-              body: "SEND Unity Circle looks after borough WhatsApp Communities. After a group is live, we attach it to that Community in WhatsApp. This website does not automate that step.",
+              body: "SEND Unity Circle looks after borough WhatsApp Communities. After a group is ready, we add it to that Community in WhatsApp. You do not need to do this yourself.",
             },
           ].map((item, index) => (
             <li

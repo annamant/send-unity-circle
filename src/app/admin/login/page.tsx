@@ -13,8 +13,8 @@ export default async function AdminLoginPage() {
     <div className="mx-auto max-w-md px-4 py-16 grid gap-6">
       <h1 className="font-display text-4xl">Admin sign in</h1>
       <p className="text-ink-muted leading-relaxed">
-        This area is for SEND Unity Circle admin — the pending queue, going live
-        after joining a group, and schools that still need a group.
+        This area is for SEND Unity Circle admin — groups waiting for you to
+        join, groups that are ready, and schools that still need a group.
       </p>
       <div className="rounded-3xl bg-paper border border-mist p-5">
         <LoginForm />

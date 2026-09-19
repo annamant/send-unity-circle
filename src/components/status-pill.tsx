@@ -4,14 +4,14 @@ export function StatusPill({ group }: { group: WhatsAppGroup | null }) {
   if (group?.status === "LIVE") {
     return (
       <span className="inline-flex rounded-full bg-sage px-3 py-1 text-xs font-bold uppercase tracking-wide text-teal-dark">
-        Group live
+        Ready to join
       </span>
     );
   }
   if (group?.status === "PENDING") {
     return (
       <span className="inline-flex rounded-full bg-mist px-3 py-1 text-xs font-bold uppercase tracking-wide text-ink-muted">
-        Being set up
+        Waiting for admin
       </span>
     );
   }

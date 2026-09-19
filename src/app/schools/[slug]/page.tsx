@@ -53,13 +53,11 @@ export default async function SchoolPage({
         {school.localAuthority}
         {school.phase ? ` · ${school.phase}` : ""}
         {school.establishmentType ? ` · ${school.establishmentType}` : ""}
-        {" · URN "}
-        {school.urn}
       </p>
 
       {submitted ? (
         <p className="rounded-2xl bg-sage px-4 py-3 font-bold" role="status">
-          Thank you. This group is pending until {founder} has joined via your
+          Thank you. This group is waiting for {founder} to join via your
           invite link.
         </p>
       ) : null}
@@ -68,7 +66,7 @@ export default async function SchoolPage({
         <section className="rounded-3xl bg-paper border border-mist p-5 grid gap-4">
           <h2 className="font-display text-2xl">Join the parent group</h2>
           <p className="text-ink-muted leading-relaxed">
-            This school&apos;s WhatsApp group is live. {founder} has already
+            This school&apos;s WhatsApp group is ready. {founder} has already
             joined. Open the invite to become a member — you do not need to add
             a contact.
           </p>
@@ -81,20 +79,20 @@ export default async function SchoolPage({
             Join on WhatsApp
           </a>
           <p className="text-sm text-ink-muted leading-relaxed">
-            SEND Unity Circle will attach live school groups to the{" "}
-            {school.localAuthority} WhatsApp Community in WhatsApp. That happens
-            after the group is live; it is not automated by this website.
+            SEND Unity Circle will add ready school groups to the{" "}
+            {school.localAuthority} WhatsApp Community in WhatsApp. You do not
+            need to do this yourself.
           </p>
         </section>
       ) : null}
 
       {pending ? (
         <section className="rounded-3xl bg-paper border border-mist p-5 grid gap-3">
-          <h2 className="font-display text-2xl">A group is being set up</h2>
+          <h2 className="font-display text-2xl">Waiting for SEND Unity Circle admin to join</h2>
           <p className="text-ink-muted leading-relaxed">
             A parent has created the WhatsApp group and sent the invite link.
             {` ${founder} `}
-            will join via that link. When we have joined, a Join button will
+            will join via that link. When they have joined, a Join button will
             appear here for everyone else.
           </p>
           <p className="text-sm text-ink-muted">

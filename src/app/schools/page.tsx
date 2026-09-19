@@ -29,8 +29,8 @@ export default async function SchoolsPage({
       <div className="grid gap-3">
         <h1 className="font-display text-4xl">Find a school</h1>
         <p className="text-ink-muted max-w-2xl leading-relaxed">
-          Search official DfE school names. If a group is live, you can join
-          from the school page. If not, you can start one.
+          Search official school names. If a group is ready, you can join from
+          the school page. If not, you can start one.
         </p>
       </div>
       <SearchForm q={q} la={la} />

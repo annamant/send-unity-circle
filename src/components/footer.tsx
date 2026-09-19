@@ -10,10 +10,9 @@ export function Footer() {
           SEND Unity Circle
         </p>
         <p className="mt-2 max-w-2xl leading-relaxed">
-          A parent-led UK network. This website is the school index and control
-          centre. School WhatsApp groups are created by parents; SEND Unity
-          Circle admin joins via the invite link. We do not create groups through
-          the WhatsApp Cloud API, and we do not use unofficial WhatsApp bots.
+          A parent-led UK network. Parents start each school WhatsApp group.
+          SEND Unity Circle admin then joins through the invite link, so the
+          next families can find it here — without adding anyone as a contact.
         </p>
         <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
           <li>
@@ -38,9 +37,9 @@ export function Footer() {
           </li>
         </ul>
         <p className="mt-6 text-xs leading-relaxed">
-          School names come from the Department for Education’s Get Information
-          about Schools (GIAS) data. WhatsApp is a product of Meta. SEND Unity
-          Circle is not affiliated with the DfE or Meta.
+          School names come from the Department for Education’s official school
+          list. WhatsApp is a product of Meta. SEND Unity Circle is not part of
+          the Department for Education or Meta.
         </p>
       </div>
     </footer>

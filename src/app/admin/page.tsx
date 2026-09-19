@@ -69,11 +69,12 @@ export default async function AdminPage({
     <div className="mx-auto max-w-5xl px-4 py-10 grid gap-8">
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div className="grid gap-2 max-w-2xl">
-          <h1 className="font-display text-4xl">Control centre</h1>
+          <h1 className="font-display text-4xl">Admin</h1>
           <p className="text-ink-muted leading-relaxed">
-            Sign in as {founder}. Join each pending group via the invite link,
-            then mark it live. After that, attach the group to the borough
-            WhatsApp Community in WhatsApp — this site does not do that for you.
+            Sign in as {founder}. Open each invite, join the group, then mark it
+            as live after you have joined. After that, add the group to the
+            borough WhatsApp Community in WhatsApp — this site does not do that
+            for you.
           </p>
         </div>
         <form action={logoutAdmin}>
@@ -138,13 +139,13 @@ export default async function AdminPage({
                     rel="noopener noreferrer"
                     className="inline-flex min-h-11 w-fit items-center rounded-full bg-teal px-4 font-bold text-cream"
                   >
-                    Open invite and join as {founder}
+                    Open invite
                   </a>
                   <p className="text-sm text-ink-muted leading-relaxed">
-                    After the school is live, attach this group to the{" "}
+                    After the group is ready for parents, add it to the{" "}
                     {group.school.localAuthority} WhatsApp Community in WhatsApp
-                    (Communities → Add group). Do not expect this website to
-                    attach it automatically.
+                    (Communities → Add group). This website will not add it for
+                    you.
                   </p>
                   <form action={updateInviteLink} className="grid gap-2 sm:grid-cols-[1fr_auto] sm:items-end">
                     <input type="hidden" name="groupId" value={group.id} />
@@ -167,7 +168,7 @@ export default async function AdminPage({
                       I have joined this group as {founder} via the invite link.
                     </label>
                     <button className="min-h-11 w-fit rounded-full bg-teal-dark px-4 font-bold text-cream">
-                      Mark live
+                      Mark as live after you’ve joined
                     </button>
                   </form>
                   <form action={rejectGroup} className="grid gap-2">
@@ -273,7 +274,7 @@ export default async function AdminPage({
                   href={`/schools/${school.slug}/start`}
                   className="text-sm font-bold text-teal-dark"
                 >
-                  Open start flow
+                  Open start steps
                 </Link>
               </li>
             ))}

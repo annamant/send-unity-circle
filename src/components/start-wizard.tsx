@@ -96,8 +96,8 @@ export function StartWizard({
             <li>Copy the link. It should start with chat.whatsapp.com.</li>
           </ol>
           <p className="text-sm text-ink-muted leading-relaxed">
-            Joining via this link is the primary path. {founderLabel} will use it
-            to enter the group. You never have to share your address book.
+            {founderLabel} will use this link to enter the group. You never have
+            to share your address book.
           </p>
           {founderE164 ? (
             <div className="rounded-2xl border border-mist bg-cream px-4 py-3 grid gap-2">
@@ -120,14 +120,14 @@ export function StartWizard({
         <section className="rounded-3xl bg-paper p-5 shadow-sm border border-mist grid gap-4">
           <h2 className="font-display text-2xl">Paste the link and submit</h2>
           <p className="text-ink-muted leading-relaxed">
-            After you submit, the school is marked pending. {founderLabel} joins
-            via the invite link. Once we have joined, the school page goes live
-            and the next parents join from this website.
+            After you send the link, the school is waiting for {founderLabel} to
+            join. Once they have joined, other parents can join from this
+            website.
           </p>
           <p className="rounded-2xl bg-sage/70 px-4 py-3 text-sm leading-relaxed">
-            Later, we attach the school group to the {localAuthority} WhatsApp
-            Community in WhatsApp. That step is done by us, not by this website
-            — you do not need to add the group to a Community yourself.
+            Later, we add the school group to the {localAuthority} WhatsApp
+            Community in WhatsApp. That is our job — you do not need to add the
+            group to a Community yourself.
           </p>
           <form action={formAction} className="grid gap-3">
             <input type="hidden" name="slug" value={slug} />

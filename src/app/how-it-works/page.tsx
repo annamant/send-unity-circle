@@ -12,9 +12,9 @@ export default function HowItWorksPage() {
     <div className="mx-auto max-w-3xl px-4 py-10 grid gap-8">
       <h1 className="font-display text-4xl">How SEND Unity Circle works</h1>
       <p className="text-lg text-ink-muted leading-relaxed">
-        The website does not replace WhatsApp. It is the school index and
-        control centre: official names, one group per school, and a clear path
-        from “no group yet” to “join here”.
+        This website does not replace WhatsApp. It helps you find the right
+        parent group for your school — official names, one group per school,
+        and a clear path from “no group yet” to “join here”.
       </p>
 
       <section className="grid gap-3">
@@ -22,36 +22,37 @@ export default function HowItWorksPage() {
         <p className="text-ink-muted leading-relaxed">
           SEND Unity Circle creates WhatsApp Communities for each borough.
           Those Communities are the hubs. School groups sit underneath them
-          once they are live. Attaching a school group to a Community is done
-          in WhatsApp by {founder} — this site never automates that.
+          once they are ready to join. {founder} adds a school group to its
+          borough Community in WhatsApp. You do not need to do that step.
         </p>
       </section>
 
       <section className="grid gap-3">
         <h2 className="font-display text-2xl">Parents start school groups</h2>
         <p className="text-ink-muted leading-relaxed">
-          From a school page, follow the guided list. Use the exact group name
-          we show (the official DfE name). Create a WhatsApp group, copy the
+          From a school page, follow the short steps. Use the exact group name
+          we show (the official school name). Create a WhatsApp group, copy the
           invite link, and paste it here. You do not have to add {founder} as a
           contact.
         </p>
       </section>
 
       <section className="grid gap-3">
-        <h2 className="font-display text-2xl">Admin joins, then it goes live</h2>
+        <h2 className="font-display text-2xl">Admin joins, then others can join</h2>
         <p className="text-ink-muted leading-relaxed">
-          {founder} opens the invite and joins. Only then is the school marked
-          live. After that, other parents join from the school page on this
-          website — still via the link, not by swapping numbers.
+          {founder} opens the invite and joins. Until then, the school is
+          waiting for SEND Unity Circle admin to join. After that, other parents
+          join from the school page on this website — still via the link, not by
+          swapping numbers.
         </p>
       </section>
 
       <section className="grid gap-3">
-        <h2 className="font-display text-2xl">What we do not do</h2>
+        <h2 className="font-display text-2xl">What we ask of you</h2>
         <ul className="list-disc pl-5 text-ink-muted leading-relaxed grid gap-2">
-          <li>We do not create WhatsApp groups through the Cloud API.</li>
-          <li>We do not run unofficial WhatsApp bots.</li>
-          <li>Family Tool AI and native apps are out of scope for this version.</li>
+          <li>A parent at the school creates the WhatsApp group — we do not create it for you.</li>
+          <li>You never have to add anyone as a contact.</li>
+          <li>You do not need to add the group to a borough Community. We do that in WhatsApp.</li>
         </ul>
       </section>
 
