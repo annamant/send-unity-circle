@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model School {
+  id                String         @id @default(cuid())
+  urn               String         @unique
+  slug              String         @unique
+  name              String
+  postcode          String
+  postcodeNorm      String
+  localAuthority    String
+  laCode            String
+  street            String?
+  locality          String?
+  town              String?
+  phase             String?
+  establishmentType String?
+  website           String?
+  nameSearch        String
+  group             WhatsAppGroup?
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+
+  @@index([localAuthority])
+  @@index([postcodeNorm])
+  @@index([laCode])
+  @@index([nameSearch])
+}
+
+model WhatsAppGroup {
+  id            String    @id @default(cuid())
+  schoolId      String    @unique
+  school        School    @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  inviteUrl     String
+  status        String    @default("PENDING")
+  submitterNote String?
+  adminNote     String?
+  submittedAt   DateTime  @default(now())
+  liveAt        DateTime?
+  rejectedAt    DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([status])
+}
