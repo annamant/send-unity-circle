@@ -11,6 +11,7 @@ Parents find their child’s school (official DfE name), join a live group, or s
 - School page: **Join** when live, or **Start group**
 - Guided start wizard (exact group name, WhatsApp steps, paste invite → pending)
 - Admin area (password): pending queue, mark live after joining, edit/reject links, schools missing groups
+- **Rights & law** (`/rights`): public, ungated map to official UK SEND, school, council and complaints sources (not legal advice)
 - **Family tools** (`/tools`): in-app chat for letters and rights questions, unlocked after join or start-group for that school (session-only in the browser; not stored on the server)
 - Seeded DfE / GIAS open establishments for **London**, including **Lambeth** and **Southwark**, **The Elmgreen School**, and **Kingsdale Foundation School**
 - Path to wider England via `npm run import:gias -- --england`

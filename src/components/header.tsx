@@ -4,6 +4,7 @@ import { Logo } from "@/components/logo";
 const links = [
   { href: "/schools", label: "Find a school", short: "Schools" },
   { href: "/how-it-works", label: "How it works", short: "How it works" },
+  { href: "/rights", label: "Rights & law", short: "Rights" },
   { href: "/tools", label: "Family tools", short: "Tools" },
 ];
 
@@ -17,12 +18,15 @@ export function Header() {
             SEND Unity Circle
           </span>
         </Link>
-        <nav aria-label="Primary" className="flex items-center gap-1 sm:gap-3">
+        <nav
+          aria-label="Primary"
+          className="flex items-center justify-end gap-0.5 sm:gap-3 flex-wrap"
+        >
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-full px-3 py-2 text-sm font-bold text-teal-dark hover:bg-sage min-h-11 inline-flex items-center whitespace-nowrap"
+              className="rounded-full px-2 sm:px-3 py-2 text-sm font-bold text-teal-dark hover:bg-sage min-h-11 inline-flex items-center whitespace-nowrap"
             >
               {link.short ? (
                 <>

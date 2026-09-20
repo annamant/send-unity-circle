@@ -68,6 +68,18 @@ export default async function ToolsPage({
           Draft a message, check what your child may be entitled to, or ask a
           question in plain English. This is parent support, not legal advice.
         </p>
+        <p className="text-ink-muted leading-relaxed">
+          For official UK sources on SEND, school and council duties, and
+          complaints, see{" "}
+          <Link
+            href="/rights"
+            className="font-bold text-teal-dark underline decoration-gold underline-offset-4"
+          >
+            Rights & law
+          </Link>
+          . You can open it any time — it is not locked behind a WhatsApp
+          group.
+        </p>
       </header>
 
       {canChat && school ? (
