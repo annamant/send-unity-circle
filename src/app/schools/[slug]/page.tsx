@@ -39,7 +39,8 @@ export default async function SchoolPage({
   const live = school.group?.status === "LIVE";
   const pending = school.group?.status === "PENDING";
   const rejected = school.group?.status === "REJECTED";
-  const toolsUnlocked = await isSchoolUnlocked(school.slug);
+  const toolsUnlocked =
+    (await isSchoolUnlocked(school.slug)) || query.joined === "1";
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 grid gap-6">
@@ -69,6 +70,27 @@ export default async function SchoolPage({
             You can use Family tools for this school while that happens.
           </p>
           <ContinueToTools slug={school.slug} schoolName={school.name} />
+        </div>
+      ) : null}
+
+      {query.joined === "1" && live && school.group && toolsUnlocked ? (
+        <div className="rounded-2xl bg-sage px-4 py-4 grid gap-3" role="status">
+          <p className="font-bold">The parent group is ready to join.</p>
+          <p className="text-sm leading-relaxed">
+            Open WhatsApp to become a member. Family tools for this school is
+            unlocked on this website — we cannot see who is in the chat.
+          </p>
+          <div className="flex flex-wrap gap-3 items-center">
+            <a
+              href={school.group.inviteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-12 items-center justify-center rounded-full bg-teal px-6 font-bold text-cream hover:bg-teal-dark"
+            >
+              Open WhatsApp
+            </a>
+            <ContinueToTools slug={school.slug} schoolName={school.name} />
+          </div>
         </div>
       ) : null}
 
