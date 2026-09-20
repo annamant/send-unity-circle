@@ -191,7 +191,7 @@ export const RIGHTS_SECTIONS: RightsSection[] = [
         href: "https://www.gov.uk/complain-about-school/sen-complaints",
         title: "Complain about a school’s SEN support",
         source: "GOV.UK",
-        note: "Start with the SENCO, then the school’s complaints process. Mentions disagreement resolution.",
+        note: "Start with the SENCO, then the school’s complaints process. Councils may also offer disagreement resolution.",
       },
       {
         href: "https://www.gov.uk/complain-about-school/disability-discrimination",
