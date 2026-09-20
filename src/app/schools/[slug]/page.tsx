@@ -4,6 +4,7 @@ import { ContinueToTools } from "@/components/continue-to-tools";
 import { CopyButton } from "@/components/copy-button";
 import { JoinGroupButton } from "@/components/join-group-button";
 import { StatusPill } from "@/components/status-pill";
+import { WhatsAppInviteLink } from "@/components/whatsapp-invite-link";
 import { getFounderDisplayName } from "@/lib/config";
 import { suggestedGroupName } from "@/lib/group-name";
 import { formatAddress, getSchoolBySlug } from "@/lib/schools";
@@ -67,8 +68,12 @@ export default async function SchoolPage({
             invite link.
           </p>
           <p className="text-sm leading-relaxed">
-            You can use Family tools for this school while that happens.
+            You can use Family tools for this school while that happens. Keep
+            this invite for {founder} if they need it.
           </p>
+          {school.group?.inviteUrl ? (
+            <WhatsAppInviteLink url={school.group.inviteUrl} />
+          ) : null}
           <ContinueToTools slug={school.slug} schoolName={school.name} />
         </div>
       ) : null}
@@ -98,9 +103,10 @@ export default async function SchoolPage({
         <section className="rounded-3xl bg-paper border border-mist p-5 grid gap-4">
           <h2 className="font-display text-2xl">Join the parent group</h2>
           <p className="text-ink-muted leading-relaxed">
-            This school&apos;s WhatsApp group is ready. Open the invite to
-            become a member.
+            This school&apos;s WhatsApp group is ready. Tap the invite to
+            become a member, or copy the link.
           </p>
+          <WhatsAppInviteLink url={school.group.inviteUrl} />
           <div className="flex flex-wrap gap-3 items-center">
             <JoinGroupButton slug={school.slug} />
             {toolsUnlocked ? (
@@ -114,8 +120,9 @@ export default async function SchoolPage({
             </p>
           ) : (
             <p className="text-sm text-ink-muted leading-relaxed">
-              Join the group first. Family tools for this school opens after
-              you tap Join.
+              You can open WhatsApp from the invite above. Family tools for
+              this school opens after you tap Join on this page — we cannot see
+              who is in the chat.
             </p>
           )}
           <p className="text-sm text-ink-muted leading-relaxed">
@@ -140,7 +147,10 @@ export default async function SchoolPage({
             <span className="font-bold text-ink">{suggestedGroupName(school.name)}</span>
           </p>
           {toolsUnlocked && !submitted ? (
-            <div className="pt-1">
+            <div className="grid gap-3 pt-1">
+              {school.group?.inviteUrl ? (
+                <WhatsAppInviteLink url={school.group.inviteUrl} />
+              ) : null}
               <ContinueToTools slug={school.slug} schoolName={school.name} />
             </div>
           ) : null}

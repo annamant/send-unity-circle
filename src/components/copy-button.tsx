@@ -16,18 +16,45 @@ export function CopyButton({
   const [copied, setCopied] = useState(false);
 
   async function copy() {
+    let ok = false;
     try {
-      await navigator.clipboard.writeText(value);
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+        ok = true;
+      }
     } catch {
+      ok = false;
+    }
+
+    if (!ok) {
       const field = document.createElement("textarea");
       field.value = value;
+      field.setAttribute("readonly", "");
+      field.setAttribute("aria-hidden", "true");
+      field.style.position = "fixed";
+      field.style.top = "0";
+      field.style.left = "0";
+      field.style.width = "1px";
+      field.style.height = "1px";
+      field.style.padding = "0";
+      field.style.opacity = "0.01";
+      field.style.fontSize = "16px";
       document.body.appendChild(field);
+      field.focus();
       field.select();
-      document.execCommand("copy");
+      field.setSelectionRange(0, value.length);
+      try {
+        ok = document.execCommand("copy");
+      } catch {
+        ok = false;
+      }
       field.remove();
     }
-    setCopied(true);
-    window.setTimeout(() => setCopied(false), 2000);
+
+    if (ok) {
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    }
   }
 
   return (
