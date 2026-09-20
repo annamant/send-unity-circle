@@ -44,7 +44,8 @@ Open [http://localhost:3000](http://localhost:3000). Admin: [http://localhost:30
 | Variable | Required | Purpose |
 | --- | --- | --- |
 | `DATABASE_URL` | yes | Postgres connection string. Local Compose default: `postgresql://postgres:postgres@localhost:5432/send_unity_circle`. On Railway, use the Postgres plugin URL (already attached to the `web` service). |
-| `ADMIN_PASSWORD` | yes | Shared password for `/admin` |
+| `ADMIN_PASSWORD` | yes | Shared password for `/admin` (also used to sign the Family tools unlock session) |
+| `APP_URL` | recommended on Railway | Public site origin, e.g. `https://web-production-fdef7.up.railway.app`. Used for Join redirects so phones are not sent to `localhost`. `NEXT_PUBLIC_APP_URL` is accepted as a fallback. |
 | `FOUNDER_WHATSAPP_DISPLAY` | no | Public label for the joining account. Default: `SEND Unity Circle admin` |
 | `FOUNDER_WHATSAPP_E164` | no | Backup number to copy in the wizard. Joining via the invite link is the primary path |
 | `OPENAI_API_KEY` | for Family tools | OpenAI-compatible API key. If unset, `/tools` shows a friendly unavailable state |
@@ -62,6 +63,8 @@ School context: `/tools?school={slug}` works once that school is unlocked. Chat 
 ### Deploy (Railway)
 
 Production is Postgres-only. The `web` service should have `DATABASE_URL` from the Railway Postgres plugin.
+
+Set `APP_URL=https://web-production-fdef7.up.railway.app` (or your custom domain) on the `web` service so Join/start redirects stay on the public https host. If it is unset, the app uses `x-forwarded-host` / `x-forwarded-proto`, then `RAILWAY_PUBLIC_DOMAIN`.
 
 `railway.json` sets the start command to `npm run start:production`, which is:
 

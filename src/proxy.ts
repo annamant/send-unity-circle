@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { ADMIN_COOKIE, verifyAdminToken } from "@/lib/admin-token";
+import { publicUrl } from "@/lib/public-origin";
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -13,7 +14,7 @@ export function proxy(request: NextRequest) {
     return NextResponse.next();
   }
 
-  const login = new URL("/admin/login", request.url);
+  const login = publicUrl(request, "/admin/login");
   login.searchParams.set("next", pathname);
   return NextResponse.redirect(login);
 }
@@ -21,3 +22,4 @@ export function proxy(request: NextRequest) {
 export const config = {
   matcher: ["/admin", "/admin/:path*"],
 };
+
