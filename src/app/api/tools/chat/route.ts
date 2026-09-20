@@ -1,4 +1,5 @@
 import {
+  FAMILY_TOOLS_LOCKED,
   FAMILY_TOOLS_UNAVAILABLE,
   buildSystemPrompt,
   isSchoolSlug,
@@ -11,6 +12,7 @@ import {
   getOpenAIBaseUrl,
 } from "@/lib/config";
 import { getSchoolBySlug } from "@/lib/schools";
+import { readUnlockedSlugs } from "@/lib/tools-session";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -22,11 +24,19 @@ type OpenAiChunk = {
   }>;
 };
 
-async function resolveSchoolContext(
-  slug: unknown,
+async function resolveUnlockedSchool(
+  requestedSlug: unknown,
 ): Promise<SchoolChatContext | null> {
-  if (typeof slug !== "string" || !isSchoolSlug(slug)) return null;
-  const school = await getSchoolBySlug(slug);
+  const unlocked = await readUnlockedSlugs();
+  if (unlocked.length === 0) return null;
+
+  const wanted =
+    typeof requestedSlug === "string" && isSchoolSlug(requestedSlug)
+      ? requestedSlug
+      : unlocked[0];
+  if (!wanted || !unlocked.includes(wanted)) return null;
+
+  const school = await getSchoolBySlug(wanted);
   if (!school) return null;
   return {
     slug: school.slug,
@@ -40,9 +50,9 @@ function jsonError(message: string, status: number) {
 }
 
 export async function POST(request: Request) {
-  const apiKey = getOpenAIApiKey();
-  if (!apiKey) {
-    return jsonError(FAMILY_TOOLS_UNAVAILABLE, 503);
+  const unlocked = await readUnlockedSlugs();
+  if (unlocked.length === 0) {
+    return jsonError(FAMILY_TOOLS_LOCKED, 403);
   }
 
   let body: unknown;
@@ -63,9 +73,17 @@ export async function POST(request: Request) {
     return jsonError("Please type a question first.", 400);
   }
 
-  const school = await resolveSchoolContext(
+  const school = await resolveUnlockedSchool(
     "schoolSlug" in body ? body.schoolSlug : undefined,
   );
+  if (!school) {
+    return jsonError(FAMILY_TOOLS_LOCKED, 403);
+  }
+
+  const apiKey = getOpenAIApiKey();
+  if (!apiKey) {
+    return jsonError(FAMILY_TOOLS_UNAVAILABLE, 503);
+  }
 
   const upstream = await fetch(`${getOpenAIBaseUrl()}/chat/completions`, {
     method: "POST",

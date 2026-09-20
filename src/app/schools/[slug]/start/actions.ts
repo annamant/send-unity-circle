@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { getSchoolBySlug } from "@/lib/schools";
+import { addUnlockedSchool } from "@/lib/tools-session";
 import { normaliseInviteUrl } from "@/lib/whatsapp";
 
 export async function submitSchoolGroup(
@@ -62,5 +63,6 @@ export async function submitSchoolGroup(
   revalidatePath(`/schools/${slug}`);
   revalidatePath("/schools");
   revalidatePath("/admin");
+  await addUnlockedSchool(school.slug);
   redirect(`/schools/${slug}?submitted=1`);
 }

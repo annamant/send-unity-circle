@@ -14,6 +14,9 @@ export type SchoolChatContext = {
 export const FAMILY_TOOLS_UNAVAILABLE =
   "Family tools is temporarily unavailable. Please try again later, or find your school WhatsApp group in the meantime.";
 
+export const FAMILY_TOOLS_LOCKED =
+  "Please find your school and join or start its parent WhatsApp group first. Then Family tools can open.";
+
 export const STARTER_CHIPS: Array<{
   id: string;
   label: string;

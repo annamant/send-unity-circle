@@ -27,10 +27,12 @@ export default function PrivacyPage() {
         out of date, admin can ask for a new one and a parent can send it again.
       </p>
       <p className="text-ink-muted leading-relaxed">
-        Family tools is an in-app chat to help with letters and questions. We
-        do not keep a copy of that chat. It stays on your device for this visit
-        only. Replies are parent support, not legal advice. If you are unsure
-        about your rights, check with an adviser.
+        Family tools is an in-app chat to help with letters and questions. It
+        opens after you join or start a school group on this website. We
+        remember that school on this device so the tools can open. We do not
+        keep a copy of the chat. It stays on your device for this visit only.
+        Replies are parent support, not legal advice. If you are unsure about
+        your rights, check with an adviser.
       </p>
     </div>
   );

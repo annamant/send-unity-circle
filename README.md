@@ -11,7 +11,7 @@ Parents find their child’s school (official DfE name), join a live group, or s
 - School page: **Join** when live, or **Start group**
 - Guided start wizard (exact group name, WhatsApp steps, paste invite → pending)
 - Admin area (password): pending queue, mark live after joining, edit/reject links, schools missing groups
-- **Family tools** (`/tools`): in-app chat for letters and rights questions (session-only in the browser; not stored on the server)
+- **Family tools** (`/tools`): in-app chat for letters and rights questions, unlocked after join or start-group for that school (session-only in the browser; not stored on the server)
 - Seeded DfE / GIAS open establishments for **London**, including **Lambeth** and **Southwark**, **The Elmgreen School**, and **Kingsdale Foundation School**
 - Path to wider England via `npm run import:gias -- --england`
 
@@ -55,9 +55,9 @@ Never put a personal first name on the public site; the joining identity is **SE
 
 ### Family tools
 
-`/tools` is an in-app chat (not a link out to ChatGPT). Optional school context: `/tools?school={slug}` looks up the official school name and local authority and adds them to the system prompt.
+`/tools` is an in-app chat (not a link out to ChatGPT). Parents unlock it by joining a live school group or submitting a start-group invite. That is a practical site gate (signed session for that school). It does not prove WhatsApp membership.
 
-Chat history is **session-only in the browser** (`sessionStorage`). The server streams a reply and does not store messages. Without `OPENAI_API_KEY`, the page still loads and explains that tools are temporarily unavailable.
+School context: `/tools?school={slug}` works once that school is unlocked. Chat history is **session-only in the browser** (`sessionStorage`). The server streams a reply and does not store messages. Without `OPENAI_API_KEY`, an unlocked `/tools` still loads and explains that tools are temporarily unavailable. Cold visits with no school flow see a “find your school first” guide, not the chat. `POST /api/tools/chat` returns 403 without an unlock.
 
 ### Deploy (Railway)
 

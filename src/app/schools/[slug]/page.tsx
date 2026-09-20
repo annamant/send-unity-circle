@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ContinueToTools } from "@/components/continue-to-tools";
 import { CopyButton } from "@/components/copy-button";
+import { JoinGroupButton } from "@/components/join-group-button";
 import { StatusPill } from "@/components/status-pill";
 import { getFounderDisplayName } from "@/lib/config";
 import { suggestedGroupName } from "@/lib/group-name";
 import { formatAddress, getSchoolBySlug } from "@/lib/schools";
+import { isSchoolUnlocked } from "@/lib/tools-session";
 
 export const dynamic = "force-dynamic";
 
@@ -36,6 +39,7 @@ export default async function SchoolPage({
   const live = school.group?.status === "LIVE";
   const pending = school.group?.status === "PENDING";
   const rejected = school.group?.status === "REJECTED";
+  const toolsUnlocked = await isSchoolUnlocked(school.slug);
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 grid gap-6">
@@ -56,10 +60,16 @@ export default async function SchoolPage({
       </p>
 
       {submitted ? (
-        <p className="rounded-2xl bg-sage px-4 py-3 font-bold" role="status">
-          Thank you. This group is waiting for {founder} to join via your
-          invite link.
-        </p>
+        <div className="rounded-2xl bg-sage px-4 py-4 grid gap-3" role="status">
+          <p className="font-bold">
+            Thank you. This group is waiting for {founder} to join via your
+            invite link.
+          </p>
+          <p className="text-sm leading-relaxed">
+            You can use Family tools for this school while that happens.
+          </p>
+          <ContinueToTools slug={school.slug} schoolName={school.name} />
+        </div>
       ) : null}
 
       {live && school.group ? (
@@ -69,14 +79,23 @@ export default async function SchoolPage({
             This school&apos;s WhatsApp group is ready. Open the invite to
             become a member.
           </p>
-          <a
-            href={school.group.inviteUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-12 items-center justify-center rounded-full bg-teal px-6 font-bold text-cream hover:bg-teal-dark"
-          >
-            Join on WhatsApp
-          </a>
+          <div className="flex flex-wrap gap-3 items-center">
+            <JoinGroupButton slug={school.slug} />
+            {toolsUnlocked ? (
+              <ContinueToTools slug={school.slug} schoolName={school.name} />
+            ) : null}
+          </div>
+          {toolsUnlocked ? (
+            <p className="text-sm text-ink-muted leading-relaxed">
+              After you open WhatsApp, come back here if you need Family tools
+              for {school.name}.
+            </p>
+          ) : (
+            <p className="text-sm text-ink-muted leading-relaxed">
+              Join the group first. Family tools for this school opens after
+              you tap Join.
+            </p>
+          )}
           <p className="text-sm text-ink-muted leading-relaxed">
             SEND Unity Circle will add ready school groups to the{" "}
             {school.localAuthority} WhatsApp Community in WhatsApp. You do not
@@ -98,6 +117,11 @@ export default async function SchoolPage({
             Exact group name:{" "}
             <span className="font-bold text-ink">{suggestedGroupName(school.name)}</span>
           </p>
+          {toolsUnlocked && !submitted ? (
+            <div className="pt-1">
+              <ContinueToTools slug={school.slug} schoolName={school.name} />
+            </div>
+          ) : null}
         </section>
       ) : null}
 
@@ -139,19 +163,25 @@ export default async function SchoolPage({
 
       <section className="rounded-3xl bg-paper border border-mist p-5 grid gap-3">
         <h2 className="font-display text-2xl">Family tools</h2>
-        <p className="text-ink-muted leading-relaxed">
-          Need help writing to the school, or a question about what your child
-          may be entitled to? Family tools can draft with you in plain English.
-          It is parent support, not legal advice.
-        </p>
-        <p>
-          <Link
-            href={`/tools?school=${school.slug}`}
-            className="font-bold text-teal-dark underline decoration-gold underline-offset-4"
-          >
-            Ask about {school.name}
-          </Link>
-        </p>
+        {toolsUnlocked ? (
+          <>
+            <p className="text-ink-muted leading-relaxed">
+              Need help writing to the school, or a question about what your
+              child may be entitled to? Family tools can draft with you in
+              plain English. It is parent support, not legal advice.
+            </p>
+            <p>
+              <ContinueToTools slug={school.slug} schoolName={school.name} />
+            </p>
+          </>
+        ) : (
+          <p className="text-ink-muted leading-relaxed">
+            Family tools for {school.name} opens after you{" "}
+            {live ? "join the parent group" : "start a group and send the invite"}
+            . We cannot see who is in WhatsApp — this is just the next step on
+            this website.
+          </p>
+        )}
       </section>
     </div>
   );

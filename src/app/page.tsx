@@ -89,15 +89,16 @@ export default async function HomePage() {
         <h2 className="font-display text-3xl">Family tools</h2>
         <p className="text-ink-muted leading-relaxed text-lg">
           Need help with a letter, or a question about what your child may be
-          entitled to? Family tools can draft with you in plain English. It is
-          parent support, not legal advice.
+          entitled to? Find your school, then join its parent group — or start
+          one. Family tools can draft with you after that. It is parent
+          support, not legal advice.
         </p>
         <p>
           <Link
-            href="/tools"
+            href="/schools"
             className="font-bold text-teal-dark underline decoration-gold underline-offset-4"
           >
-            Open Family tools
+            Find your school
           </Link>
         </p>
       </section>
